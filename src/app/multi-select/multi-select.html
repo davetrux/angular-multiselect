@@ -1,10 +1,8 @@
 <div class="multiselect-wrapper">
-  <div class="multiselect-container"
+  <button class="multiselect-container"
        tabindex="0"
        [class.active]="isOpen"
        (click)="toggleDropdown()"
-       (keydown)="toggleDropdown()"
-       (keyup)="toggleDropdown()"
   >
     <div class="multiselect-selected">
       @if (selectedOptions.length > 0) {
@@ -17,7 +15,7 @@
           }
         </div>
       } @else {
-        <span class="placeholder-text">{{ placeholder }}</span>
+        <div class="placeholder-text">{{ placeholder }}</div>
       }
       <span class="multiselect-caret">&#8964;</span>
     </div>
@@ -34,7 +32,7 @@
             >
               <div class="option-label">{{ option.label }}</div>
               @if(option.extra) {
-                <div >{{ option.extra }}</div>
+                <div class="option-extra">{{ option.extra }}</div>
               }
             </div>
           }
@@ -47,6 +45,6 @@
         </div>
       </div>
     }
-  </div>
+  </button>
 </div>
 

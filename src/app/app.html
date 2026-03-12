@@ -2,7 +2,19 @@
   <div class="content">
     <h1>Angular Multi-select</h1>
     <div class="holder">
-      <app-multi-select [items]="listOfDropdownItems"></app-multi-select>
+      <app-multi-select
+        [items]="listOfDropdownItems"
+        placeholder="Choose one or more items"
+        (selectionChange)="selectionListener($event)">
+      </app-multi-select>
+    </div>
+  </div>
+  <div class="sample-output">
+    <h2>Currently Selected Items:</h2>
+    <div>
+      @for(item of items(); track $index;) {
+        <div class="output-item">{{ getLabelForId(item)}}</div>
+      }
     </div>
   </div>
 </main>

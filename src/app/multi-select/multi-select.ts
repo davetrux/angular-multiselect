@@ -8,8 +8,8 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { MultiselectOption } from './MultiselectOption';
-import { SelectionChangeData } from './SelectionChangeData';
+import { MultiselectOption } from '../models/MultiselectOption';
+
 
 @Component({
   selector: 'app-multi-select',
@@ -20,27 +20,19 @@ import { SelectionChangeData } from './SelectionChangeData';
 export class MultiSelect implements OnInit {
   @Input() items!: MultiselectOption[];
   @Input() placeholder = 'Select';
-  @Output() selectionChange = new EventEmitter<SelectionChangeData>();
+  @Output() selectionChange = new EventEmitter<string[]>();
 
   public selectedOptions: string[] = [];
   public isOpen = false;
 
-  private readonly selectionData: SelectionChangeData;
   private readonly elementRef: ElementRef = inject(ElementRef);
-
-  constructor() {
-    this.selectionData = {
-      idList: [],
-    } satisfies SelectionChangeData;
-  }
 
   ngOnInit(): void {
     for (const item of this.items) {
       if (item.selected) {
-        this.selectedOptions.push(item.id);
-      }
+        this.selectedOptions.push(item.id);}
     }
-    this.selectionChange.emit(this.selectionData);
+    this.selectionChange.emit(this.selectedOptions);
   }
 
   toggleDropdown(): void {
@@ -54,7 +46,7 @@ export class MultiSelect implements OnInit {
     } else {
       this.selectedOptions.push(value);
     }
-    this.selectionChange.emit(this.selectionData);
+    this.selectionChange.emit(this.selectedOptions);
   }
 
   removeOption(value: string, event?: Event): void {
@@ -64,7 +56,7 @@ export class MultiSelect implements OnInit {
     const index = this.selectedOptions.indexOf(value);
     if (index > -1) {
       this.selectedOptions.splice(index, 1);
-      this.selectionChange.emit(this.selectionData);
+      this.selectionChange.emit(this.selectedOptions);
     }
   }
 
