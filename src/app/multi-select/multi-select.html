@@ -1,0 +1,52 @@
+<div class="multiselect-wrapper">
+  <div class="multiselect-container"
+       tabindex="0"
+       [class.active]="isOpen"
+       (click)="toggleDropdown()"
+       (keydown)="toggleDropdown()"
+       (keyup)="toggleDropdown()"
+  >
+    <div class="multiselect-selected">
+      @if (selectedOptions.length > 0) {
+        <div class="selected-items">
+          @for (selected of getSelectedLabels(); track selected.id) {
+            <span class="selected-item">
+              {{ selected.label }}
+              <button (click)="removeOption(selected.id, $event)">x</button>
+            </span>
+          }
+        </div>
+      } @else {
+        <span class="placeholder-text">{{ placeholder }}</span>
+      }
+      <span class="multiselect-caret">&#8964;</span>
+    </div>
+
+    @if (isOpen) {
+      <div class="multiselect-dropdown">
+        <div class="options-container">
+          @for (option of items; track option.id) {
+            <div
+              class="option-item"
+              [class.selected]="isSelected(option.id)"
+              (keydown)="toggleOption(option.id); $event.stopPropagation()"
+              (click)="toggleOption(option.id); $event.stopPropagation()"
+            >
+              <div class="option-label">{{ option.label }}</div>
+              @if(option.extra) {
+                <div >{{ option.extra }}</div>
+              }
+            </div>
+          }
+
+          @if (items.length === 0) {
+            <div class="no-results">
+              No items found for list
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
