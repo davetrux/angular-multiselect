@@ -7,7 +7,7 @@ A project demonstrating a blog post.
 Deployed to Github pages. Used this command:
 
 ```shell
-ng deploy --base-href=/simple-carousel/
+ng deploy --base-href=/angular-multiselect/
 ```
 using [angular-cli-ghpages](https://github.com/angular-schule/angular-cli-ghpages).
 
