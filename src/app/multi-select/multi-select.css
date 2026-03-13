@@ -112,6 +112,10 @@
   font-weight: 600;
 }
 
+.option-item.active {
+  outline: 2px solid #96c8da;
+  outline-offset: -2px;
+}
 
 .option-label {
   flex: 1;

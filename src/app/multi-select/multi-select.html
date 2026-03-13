@@ -5,6 +5,7 @@
        tabindex="0"
        aria-label="Multiple Select"
        [aria-expanded]="isOpen"
+       [aria-activedescendant]="activeOptionId"
        [class.active]="isOpen"
        (click)="toggleDropdown()"
        (keydown)="onKeyDown($event)"
@@ -15,7 +16,12 @@
           @for (selected of getSelectedLabels(); track selected.id) {
             <span class="selected-item">
               {{ selected.label }}
-              <button (click)="removeOption(selected.id, $event)" aria-label="Remove {{ selected.label }}">x</button>
+              <button
+                (click)="removeOption(selected.id, $event)"
+                (keydown.enter)="removeOption(selected.id, $event)"
+                (keydown.space)="removeOption(selected.id, $event)"
+                aria-label="Remove {{ selected.label }}"
+              >x</button>
             </span>
           }
         </div>
@@ -28,11 +34,13 @@
     @if (isOpen) {
       <div class="multiselect-dropdown">
         <div id="combo-box" class="options-container" role="listbox" aria-multiselectable="true">
-          @for (option of items; track option.id) {
+          @for (option of items; track option.id; let i = $index;) {
             <div
+              id="option-{{option.id}}"
               class="option-item"
               role="option"
-              tabindex="0"
+              tabindex="-1"
+              [class.active]="activeIndex === i"
               [aria-selected]="isSelected(option.id)"
               [class.selected]="isSelected(option.id)"
               (keydown)="toggleOption(option.id); $event.stopPropagation()"
