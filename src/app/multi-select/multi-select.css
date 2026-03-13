@@ -1,20 +1,14 @@
-.multiselect-wrapper {
-  width: 100%;
-}
-
 .multiselect-container {
   position: relative;
   width: 100%;
-  border: none;
-  outline: none;
   padding: 0;
+  cursor: pointer;
 }
 
 .multiselect-selected {
   display: flex;
   align-items: center;
   justify-content: start;
-  min-height: 38px;
   padding: 0.25rem;
   border: 1px solid rgba(34, 36, 38, 0.15);
   border-radius: 0.25rem;
@@ -35,6 +29,7 @@
 .multiselect-caret {
   margin-right: 0.5rem;
   padding-bottom: 0.5rem;
+  cursor: pointer;
 }
 
 .selected-items {

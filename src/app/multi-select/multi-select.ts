@@ -35,6 +35,14 @@ export class MultiSelect implements OnInit {
     this.selectionChange.emit(this.selectedOptions);
   }
 
+  onKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.toggleDropdown();
+    } else if(event.key === 'Escape') {
+      this.isOpen = false;
+    }
+  }
+
   toggleDropdown(): void {
     this.isOpen = !this.isOpen;
   }
